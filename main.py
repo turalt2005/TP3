@@ -32,18 +32,28 @@ while Quit == 'n':
             nb_vies = nb_vies - monstres
 
     if choix == str(2):
-        nb_vies - 1
+        nb_vies = nb_vies - 1
         print("Vous vous echappez du combat! Mais en consequence, vous perdez une vie...")
+        print(nb_vies)
+
+    def scale():
+        scale = 0
+        if choix == str(2):
+            scale = scale + 1
+            if scale == 3:
+                monstres = 10
+
 
     if choix == str(3):
         print(regles_jeu)
 
     if choix == str(4):
         Quit = input('Voulez-vous quitter? y/n')
-        if Quit == y:
-            print ("Merci d'avoir joué!")
+        print("Merci d'avoir joué!!")
+        print("votre score est: ",nb_vies)
+        break
 
     if nb_vies == 0:
-        print ("Vous avez perdu tous vos vies...")
+        break
         print (nb_vies)
         print ("Merci d'avoir joué!")
