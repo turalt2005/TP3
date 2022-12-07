@@ -54,6 +54,6 @@ while Quit == 'n':
         break
 
     if nb_vies == 0:
-        break
         print (nb_vies)
         print ("Merci d'avoir joué!")
+        break
