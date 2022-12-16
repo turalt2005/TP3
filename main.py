@@ -3,57 +3,66 @@
 
 import random
 
-Quit = 'n'
+
+def combat (force):
+    de1 = random.randint (1, 6)
+    de2 = random.randint (1, 6)
+    resultat = de1 + de2
+    if resultat > force:
+        return "VICTOIRE!!!"
+    return "Echec..."
+
+
 nb_vies = 20
-monstres = random.randint (1, 5)
-de = random.randint (1, 6)
-regles_jeu = ("Bienvenue! Dans cette aventure, tu auras l'option de combattre des monstres avec des vies montant de 1 à 5.\n" \
-             "Tu as 20 vies. Si tu decide de le combattre avec le nombre 1,tu laceras 2 dés avec des valeurs de 1 à 6 chancun.\n" \
-             "Si le resulat est plus bas que le nbr de vies du monstre, tu perdera des vies egale aux vies du monstre. Perd tous les 20 et c`est partie terminée!\n"\
-             "Quand tu gagne, tu gangera des points egale au vies du monstre battue.\n" \
-             "Si tu decide de cliquer 2, tu echappera le combat, mais si tu decide de faire cela, tu perdera une vie.\n" \
-             "Clique 3 et tu pourra voir ce message\n" \
-             "Clique 4, et tu quitter le jeu.\n" \
-             "BONNE PARTIE!!! :D")
-while Quit == 'n':
-    choix = input("Que desirez-vous faire?" \
-                   "1- Combattre\n"
-                   "2- Contourner et aller ouvrir une autre porte\n" \
-                   "3- Revoir les règles du jeu\n" \
-                   "4- Arrêter le jeu")
+monstres = 0
+nbr_combat = 0
+nbr_victoires_de_suite = 0
+force_de_base = 2
+force_maximale = 11
+monstres = random.randint(force_de_base, force_maximale)
+while nb_vies > 0:
+    monstres = random.randint(force_de_base, force_maximale)
+    choix = input ("Que desirez-vous faire?" \
+         "1- Combattre\n"
+         "2- Contourner et aller ouvrir une autre porte\n" \
+         "3- Revoir les règles du jeu\n" \
+         "4- Arrêter le jeu")
+
 
     if choix == str(1):
         print(nb_vies)
         print(monstres)
-        if de > monstres:
+        de1 = random.randint(1, 6)
+        de2 = random.randint(1, 6)
+        resultat = de1 + de2
+        if resultat > monstres:
             nb_vies = nb_vies + monstres
             print("Victoire!")
-        if de <= monstres:
-            nb_vies = nb_vies - monstres
+        if resultat <= monstres:
+            print("Defaite...")
+            nb_vies -= monstres
+        if nbr_victoires_de_suite > 2:
+                    print("Vous allez maintenant combattre un monstre plus fort jusqu'a votre prochaine defaite")
 
     if choix == str(2):
-        nb_vies = nb_vies - 1
+        nb_vies -= 1
+        monstres += 1
         print("Vous vous echappez du combat! Mais en consequence, vous perdez une vie...")
         print(nb_vies)
-
-    def scale():
-        scale = 0
-        if choix == str(2):
-            scale = scale + 1
-            if scale == 3:
-                monstres = 10
-
+        monstres = random.randint(force_de_base, force_maximale)
 
     if choix == str(3):
-        print(regles_jeu)
+        print("Pour réussir un combat, il faut que la valeur du dé lancé soit supérieure à la force de l’adversaire.  Dans ce cas, le niveau de vie de l’usager est augmenté de la force de l’adversaire."
+              "Une défaite a lieu lorsque la valeur du dé lancé par l’usager est inférieure ou égale à la force de l’adversaire.  Dans ce cas, le niveau de vie de l’usager est diminué de la force de l’adversaire."
+              "La partie se termine lorsque les points de vie de l’usager tombent sous 0." )
 
     if choix == str(4):
         Quit = input('Voulez-vous quitter? y/n')
-        print("Merci d'avoir joué!!")
-        print("votre score est: ",nb_vies)
-        break
+        if Quit == 'y':
+            print("Merci d'avoir joué!!")
+            print("votre score est: ",nb_vies)
+            nb_vies = 0
 
     if nb_vies == 0:
         print (nb_vies)
         print ("Merci d'avoir joué!")
-        break
